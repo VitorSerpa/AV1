@@ -20,15 +20,38 @@ export default class Funcionario{
         this.nivelPermissao = new NivelPermissao(nivelPermissao)
     }
 
-    public carregar(){
-        const objectFuncionario = FileManagement.readFile("funcionario.txt")
-        this.id = objectFuncionario["id"]
-        this.nome = objectFuncionario["nome"]
-        this.telefone = objectFuncionario["telefone"]
-        this.endereco = objectFuncionario["endereco"]
-        this.usuario = objectFuncionario["usuario"]
-        this.senha = objectFuncionario["senha"]
-        this.nivelPermissao = new NivelPermissao(objectFuncionario["nivelPermissao"])
+    public static carregar(): Array<Funcionario>{
+        const dados: Array<object> = FileManagement.readFile("funcionario.txt")   
+        const funcionarios: Array<Funcionario> = [] 
+        dados.forEach((obj) => {
+            funcionarios.push(
+                new Funcionario(
+                    obj["id"],
+                    obj["nome"],
+                    obj["telefone"],
+                    obj["endereco"],
+                    obj["usuario"],
+                    obj["senha"],
+                    obj["nivelPermissao"]
+                )
+            )
+        })
+        return funcionarios
+    }
+
+    public salvar(){
+        const objectFuncionario = {
+            id : this.id,
+            nome : this.nome,
+            telefone : this.telefone,
+            endereco : this.endereco,
+            usuario : this.usuario,
+            senha : this.senha,
+            nivelPermissao : this.nivelPermissao.permissao
+        }
+
+        FileManagement.saveFile(objectFuncionario, "funcionario.txt")
+
     }
 
     public autenticar(usuario: string, senha: string){

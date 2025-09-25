@@ -1,27 +1,51 @@
 import * as fs from 'fs';
+import path = require('path');
 
 export default class FileManagement{
-    public static readFile(nomeArquivo: string): object{
+    public static registersPath = "./Registers/"
+
+    public static readFile(nomeArquivo: string): Array<object>{
         try{
-            const textFile = fs.readFileSync('./Registers/' + nomeArquivo, { encoding: 'utf-8' });
-            const textInfoArray = textFile.split("\n")
+            const textFile = fs.readFileSync(this.registersPath + nomeArquivo, { encoding: 'utf-8' });
+            const blocos = textFile.split(",")
+            let arrayObjs: Array<object> = []
 
-            let varObject: Record<string, string> = {}
+            blocos.forEach((bloco) => {
+                const textInfoArray = bloco.split("\n")
 
-            textInfoArray.forEach((value)=>{
-                const keyValueArray: Array<string> = value.trim().replace("\r", "").split(":")
-                if (keyValueArray.length === 2) {
-                    const key = keyValueArray[0]?.trim();
-                    const val = keyValueArray[1]?.trim();
+                let varObject: Record<string, string> = {}
+                textInfoArray.forEach((value)=>{
+                    const keyValueArray: Array<string> = value.trim().replace("\r", "").split(":")
+                    if (keyValueArray.length === 2) {
+                        const key = keyValueArray[0]?.trim();
+                        const val = keyValueArray[1]?.trim();
 
-                if (key && val) {
-                    varObject[key] = val;
-                }}
+                    if (key && val) {
+                        varObject[key] = val;
+                    }}
+                })
+                arrayObjs.push(varObject)
             })
-            return varObject
+            return arrayObjs
         }catch(err){
-            return {mensagem: "Não foi possivel ler o arquivo"}
+            return [{mensagem: "Não foi possivel ler o arquivo"}]
         }
+    }
+
+    public static saveFile(obj: object, nomeArquivo: string): void{
+        try{
+            let text = ",\n"
+            Object.entries(obj).forEach(([key, value]) => {
+                text += `${key} : ${value}\n`
+            })
+            fs.appendFileSync(this.registersPath + nomeArquivo, text)
+            console.log("Funcionário salvo!")
+            
+        }catch(err){
+            console.log("Erro ao editar arquivo")
+        }
+
+
     }
 
 }

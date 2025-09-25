@@ -1,7 +1,6 @@
 import Funcionario from "./Models/Controller/Funcionario"
 
-const func = new Funcionario("1", "Vitor Serpa", "", "", "", "", "ADMINISTRADOR")
+let arrayFuncionarios: Array<Funcionario> = Funcionario.carregar();
 
-func.carregar()
+console.log(arrayFuncionarios)
 
-console.log(func) 
