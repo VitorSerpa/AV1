@@ -4,10 +4,11 @@ import path = require('path');
 export default class FileManagement{
     public static registersPath = "./Registers/"
 
-    public static readFile(nomeArquivo: string): Array<object>{
+    public static readFile(nomeArquivo: string): Array<object> {
         try{
             const textFile = fs.readFileSync(this.registersPath + nomeArquivo, { encoding: 'utf-8' });
-            const blocos = textFile.split(",")
+        
+            const blocos = textFile.split("---")
             let arrayObjs: Array<object> = []
 
             blocos.forEach((bloco) => {
@@ -34,7 +35,7 @@ export default class FileManagement{
 
     public static saveFile(obj: object, nomeArquivo: string): void{
         try{
-            let text = ",\n"
+            let text = "---\n"
             Object.entries(obj).forEach(([key, value]) => {
                 text += `${key} : ${value}\n`
             })
@@ -44,8 +45,5 @@ export default class FileManagement{
         }catch(err){
             console.log("Erro ao editar arquivo")
         }
-
-
     }
-
 }

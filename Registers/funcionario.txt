@@ -1,23 +1,8 @@
+---
 id : 1
-nome : Vitor Serpa
+nome : Serpe
 telefone : 12981312111
-endereco: Rua Capitão Alipio Neves, 84
+endereco : Rua Eugenio de Melo
 usuario : VitorSerpa
-senha : 12345
+senha : 1234
 nivelPermissao : ENGENHEIRO
-,
-id : 1
-nome : Vitor Serpa
-telefone : 
-endereco : 
-usuario : 
-senha : 
-nivelPermissao : ADMINISTRADOR
-,
-id : 1
-nome : Vitor Serpa
-telefone : 
-endereco : 
-usuario : 
-senha : 
-nivelPermissao : ADMINISTRADOR

@@ -1,4 +1,4 @@
-import NivelPermissao from "../Entities/NivelPermissao"
+import { NivelPermissao } from "../Entities/NivelPermissao"
 import FileManagement from "./FileManagement"
 
 
@@ -10,18 +10,19 @@ export default class Funcionario{
     public usuario: string
     private senha: string
     public nivelPermissao: NivelPermissao 
-    constructor(id: string, nome: string, telefone: string, endereco: string, usuario: string, senha: string, nivelPermissao: string){
+    constructor(id: string, nome: string, telefone: string, endereco: string, usuario: string, senha: string, nivelPermissao: NivelPermissao){
         this.id = id
         this.nome = nome
         this.telefone = telefone
         this.endereco = endereco
         this.usuario = usuario
         this.senha = senha
-        this.nivelPermissao = new NivelPermissao(nivelPermissao)
+        this.nivelPermissao = nivelPermissao
     }
 
     public static carregar(): Array<Funcionario>{
         const dados: Array<object> = FileManagement.readFile("funcionario.txt")   
+
         const funcionarios: Array<Funcionario> = [] 
         dados.forEach((obj) => {
             funcionarios.push(
@@ -32,10 +33,12 @@ export default class Funcionario{
                     obj["endereco"],
                     obj["usuario"],
                     obj["senha"],
-                    obj["nivelPermissao"]
+                    NivelPermissao[obj["nivelPermissao"] as keyof typeof NivelPermissao]
                 )
             )
         })
+        console.log("===================")
+        console.log(dados.length + " Funcionarios carregados com sucesso!")
         return funcionarios
     }
 
@@ -47,7 +50,7 @@ export default class Funcionario{
             endereco : this.endereco,
             usuario : this.usuario,
             senha : this.senha,
-            nivelPermissao : this.nivelPermissao.permissao
+            nivelPermissao : NivelPermissao[this.nivelPermissao]
         }
 
         FileManagement.saveFile(objectFuncionario, "funcionario.txt")
