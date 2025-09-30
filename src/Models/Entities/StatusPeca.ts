@@ -1,3 +1,5 @@
-export default class StatusPeca{
-    
+export enum StatusPeca{
+    "PENDENTE",
+    "ANDAMENTO",
+    "CONCLUIDA"
 }

@@ -1,3 +1,5 @@
-export default class TipoTeste{
-    
+export enum TipoTeste{
+    "ELETRICO",
+    "HIDRAULICO",
+    "AERODINAMICO"
 }

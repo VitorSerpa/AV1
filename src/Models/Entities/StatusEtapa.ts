@@ -1,3 +1,5 @@
-export default class StatusEtapa{
-    
+export enum StatusEtapa{
+    "PENDENTE",
+    "ANDAMENTO",
+    "CONCLUIDA"
 }

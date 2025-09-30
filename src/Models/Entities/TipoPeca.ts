@@ -1,3 +1,5 @@
-export default class TipoPeca{
-
+export enum TipoPeca{
+    "EM_PRODUCAO",
+    "EM_TRANSPOTE",
+    "PRONTA"
 }
