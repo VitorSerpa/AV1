@@ -20,6 +20,16 @@ export default class Funcionario{
         this.nivelPermissao = nivelPermissao
     }
 
+    public printFuncionario():void{
+        console.log("===================")
+        console.log("ID: " + this.id)
+        console.log("Nome: " + this.nome)
+        console.log("Telefone: " + this.telefone)
+        console.log("Endereço: " + this.endereco)
+        console.log("Nome de Usuario: " + this.usuario)
+        console.log("Nivel de Permissão: " + this.nivelPermissao)
+    }
+
     public static carregar(): Array<Funcionario>{
         const dados: Array<object> = FileManagement.readFile("funcionario.txt")   
 

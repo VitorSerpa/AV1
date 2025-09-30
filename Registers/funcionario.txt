@@ -1,8 +1,15 @@
----
 id : 1
 nome : Serpe
 telefone : 12981312111
 endereco : Rua Eugenio de Melo
 usuario : VitorSerpa
+senha : 1234
+nivelPermissao : ADMINISTRADOR
+---
+id : 2
+nome : Henry
+telefone : 1291823132
+endereco : DSAdsadsad
+usuario : Henry
 senha : 1234
 nivelPermissao : ENGENHEIRO

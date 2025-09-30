@@ -1,5 +1,5 @@
-import TipoPeca from "../Entities/TipoPeca"
-import StatusPeca from "../Entities/StatusPeca"
+import {TipoPeca} from "../Entities/TipoPeca"
+import {StatusPeca} from "../Entities/StatusPeca"
 
 export default class Peca{
     public nome: string

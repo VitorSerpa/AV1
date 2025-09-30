@@ -1,5 +1,5 @@
-import TipoTeste from "../Entities/TipoTeste";
-import ResultadoTeste from "../Entities/ResultadoTeste";
+import {TipoTeste} from "../Entities/TipoTeste";
+import {ResultadoTeste} from "../Entities/ResultadoTeste";
 
 export default class Teste{
     public tipo: TipoTeste
