@@ -1,5 +1,5 @@
 export enum StatusPeca{
-    "PENDENTE",
-    "ANDAMENTO",
-    "CONCLUIDA"
+    "EM_PRODUÇÃO",
+    "EM_TRANSPORTE",
+    "PRONTA"
 }

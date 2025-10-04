@@ -1,49 +1,61 @@
-import * as fs from 'fs';
-import path = require('path');
+import * as fs from "fs";
+import path = require("path");
 
-export default class FileManagement{
-    public static registersPath = "./Registers/"
+export default class FileManagement {
+    public static registersPath = "./Registers/";
 
     public static readFile(nomeArquivo: string): Array<object> {
-        try{
-            const textFile = fs.readFileSync(this.registersPath + nomeArquivo, { encoding: 'utf-8' });
-        
-            const blocos = textFile.split("---")
-            let arrayObjs: Array<object> = []
+        try {
+            const textFile = fs.readFileSync(this.registersPath + nomeArquivo, { encoding: "utf-8" });
+
+            if (textFile == "") {
+                return [];
+            }
+
+            const blocos = textFile.split("---");
+            let arrayObjs: Array<object> = [];
 
             blocos.forEach((bloco) => {
-                const textInfoArray = bloco.split("\n")
+                const textInfoArray = bloco.split("\n");
 
-                let varObject: Record<string, string> = {}
-                textInfoArray.forEach((value)=>{
-                    const keyValueArray: Array<string> = value.trim().replace("\r", "").split(":")
+                let varObject: Record<string, string> = {};
+                textInfoArray.forEach((value) => {
+                    const keyValueArray: Array<string> = value.trim().replace("\r", "").split(":");
                     if (keyValueArray.length === 2) {
                         const key = keyValueArray[0]?.trim();
                         const val = keyValueArray[1]?.trim();
 
-                    if (key && val) {
-                        varObject[key] = val;
-                    }}
-                })
-                arrayObjs.push(varObject)
-            })
-            return arrayObjs
-        }catch(err){
-            return [{mensagem: "Não foi possivel ler o arquivo"}]
+                        if (key && val) {
+                            if (val.startsWith("[") && val.endsWith("]")) {
+                                varObject[key] = JSON.parse(val);
+                            } else {
+                                varObject[key] = val;
+                            }
+                        }
+                    }
+                });
+                arrayObjs.push(varObject);
+            });
+            return arrayObjs;
+        } catch (err) {
+            return [{ mensagem: "Não foi possivel ler o arquivo" }];
         }
     }
 
-    public static saveFile(obj: object, nomeArquivo: string): void{
-        try{
-            let text = "---\n"
+    public static saveFile(obj: object, nomeArquivo: string): void {
+        try {
+            let pathText = fs.readFileSync(this.registersPath + nomeArquivo, { encoding: "utf-8" });
+            let text = "---\n";
+            if(pathText == ""){
+                text = ""
+            }
             Object.entries(obj).forEach(([key, value]) => {
-                text += `${key} : ${value}\n`
-            })
-            fs.appendFileSync(this.registersPath + nomeArquivo, text)
-            console.log("Funcionário salvo!")
-            
-        }catch(err){
-            console.log("Erro ao editar arquivo")
+                text += `${key} : ${value}\n`;
+            });
+            fs.appendFileSync(this.registersPath + nomeArquivo, text);
+            console.log("Arquivo salvo!");
+        } catch (err) {
+            console.log("Erro ao editar arquivo");
         }
     }
 }

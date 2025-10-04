@@ -5,11 +5,13 @@ endereco : Rua Eugenio de Melo
 usuario : VitorSerpa
 senha : 1234
 nivelPermissao : ADMINISTRADOR
+etapasAssociadas : [1, 2]
 ---
 id : 2
 nome : Henry
-telefone : 1291823132
-endereco : DSAdsadsad
+telefone : 12981312111
+endereco : Rua Eugenio de Melo
 usuario : Henry
-senha : 1234
-nivelPermissao : ENGENHEIRO
+senha : 123
+nivelPermissao : OPERADOR
+etapasAssociadas : [1, 2]

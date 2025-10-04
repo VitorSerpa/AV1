@@ -1,2 +1,11 @@
-nome : Criação do Bico
-prazo : 2 semanas
+id : 1
+nome : Criação do BIco
+prazo : 2 Semanas
+status : PENDENTE
+aeronaveAssociada : 1
+---
+id : 2
+nome : Criação do Trem de Pouso
+prazo : 2 Semanas
+status : PENDENTE
+aeronaveAssociada : 2

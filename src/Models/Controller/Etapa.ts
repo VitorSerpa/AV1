@@ -1,70 +1,89 @@
 import Funcionario from "./Funcionario";
 import { StatusEtapa } from "../Entities/StatusEtapa";
 import FileManagement from "./FileManagement";
+import Aeronave from "./Aeronave";
 
 export default class Etapa {
-    public nome: string
-    public prazo: string
-    public status: StatusEtapa
-    public funcionarios: Array<Funcionario> = []
+    public id: string;
+    public nome: string;
+    public prazo: string;
+    public status: StatusEtapa;
+    public arrayFuncionarios: Array<Funcionario> = [];
+    public aeronaveAssociada: string;
 
-    constructor(nome: string, prazo: string) {
-        this.nome = nome
-        this.prazo = prazo
-        this.status = StatusEtapa.PENDENTE
+    constructor(id: string, nome: string, prazo: string, arrayFunc: Array<Funcionario>, aeronaveAssociada: string) {
+        this.id = id;
+        this.nome = nome;
+        this.prazo = prazo;
+        this.status = StatusEtapa.PENDENTE;
+        this.arrayFuncionarios = arrayFunc;
+        this.aeronaveAssociada = aeronaveAssociada;
     }
 
     public associarFuncionario(func: Funcionario) {
-        this.funcionarios.push(func)
+        this.arrayFuncionarios.push(func);
     }
 
     public iniciar() {
-        this.status = StatusEtapa.ANDAMENTO
+        this.status = StatusEtapa.ANDAMENTO;
     }
 
     public finalizar() {
-        this.status = StatusEtapa.CONCLUIDA
-    }
-
-    public static carregar() {
-        const dados: Array<object> = FileManagement.readFile("etapa.txt")
-
-        const etapas: Array<Etapa> = []
-        dados.forEach((obj) => {
-            etapas.push(
-                new Etapa(
-                    obj["nome"],
-                    obj["prazo"],
-                )
-            )
-        })
-        console.log("===================")
-        console.log(dados.length + " Etapas carregadas com sucesso!")
-        return etapas
+        this.status = StatusEtapa.CONCLUIDA;
     }
 
     public listarFuncionarios(): void {
-        this.funcionarios.forEach((value) => {
-            value.printFuncionario()
-            console.log("Etapa: " + this.nome)
-        })
+        this.arrayFuncionarios.forEach((value) => {
+            value.printFuncionario();
+            console.log("Etapa: " + this.nome);
+        });
     }
 
-    public printarEtapa(): void {
-        let funcionariosText: string = "Nenhum funcionário associado"
-        if(this.funcionarios.length !== 0){
-            funcionariosText = ""
-            this.funcionarios.forEach((value) => {
-                funcionariosText += value.nome + "\n"
-            })
+    public salvar() {
+        const objectAeronave = {
+            id: this.id,
+            nome: this.nome,
+            prazo: this.prazo,
+            status: StatusEtapa[this.status],
+            aeronaveAssociada: this.aeronaveAssociada,
+        };
+        
+        FileManagement.saveFile(objectAeronave, "etapa.txt");
+    }
+
+    public static carregar(): Array<Etapa> {
+        const dados: Array<object> = FileManagement.readFile("etapa.txt");
+
+        if (dados.length === 0) {
+            console.log("Nenhuma etapa carregado!");
+            return [];
         }
-        
-        
-        console.log("===================")
-        console.log("Nome: " + this.nome)
-        console.log("Prazo: " + this.prazo)
-        console.log("Status: " + this.status)
-        console.log("Funcionarios associados:")
-        console.log(funcionariosText)
+
+        const etapas: Array<Etapa> = [];
+        dados.forEach((obj) => {
+            etapas.push(
+                new Etapa(
+                    obj["id"],
+                    obj["nome"],
+                    obj["prazo"],
+                    [],
+                    obj["aeronaveAssociada"]
+                )
+            );
+        });
+        console.log("===================");
+        console.log(dados.length + " Etapas carregadas com sucesso!");
+        return etapas;
+    }
+
+
+    public printEtapa(): void {
+        console.log("===================");
+        console.log("ID: " + this.id);
+        console.log("Nome: " + this.nome);
+        console.log("Prazo: " + this.prazo);
+        console.log("Status: " + StatusEtapa[this.status]);
+        console.log("Funcionários associados: " + this.arrayFuncionarios.map((f) => f.nome).join(", "));
+        console.log("Aeronave associada: " + this.aeronaveAssociada);
     }
 }

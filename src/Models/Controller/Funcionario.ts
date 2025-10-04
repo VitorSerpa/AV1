@@ -10,7 +10,9 @@ export default class Funcionario{
     public usuario: string
     private senha: string
     public nivelPermissao: NivelPermissao 
-    constructor(id: string, nome: string, telefone: string, endereco: string, usuario: string, senha: string, nivelPermissao: NivelPermissao){
+    public arrayEtapasAssociadas: Array<number> = []
+
+    constructor(id: string, nome: string, telefone: string, endereco: string, usuario: string, senha: string, nivelPermissao: NivelPermissao, arrayEtapasAssociadas: Array<number>){
         this.id = id
         this.nome = nome
         this.telefone = telefone
@@ -18,6 +20,7 @@ export default class Funcionario{
         this.usuario = usuario
         this.senha = senha
         this.nivelPermissao = nivelPermissao
+        this.arrayEtapasAssociadas = arrayEtapasAssociadas
     }
 
     public printFuncionario():void{
@@ -27,11 +30,16 @@ export default class Funcionario{
         console.log("Telefone: " + this.telefone)
         console.log("Endereço: " + this.endereco)
         console.log("Nome de Usuario: " + this.usuario)
-        console.log("Nivel de Permissão: " + this.nivelPermissao)
+        console.log("Nivel de Permissão: " + NivelPermissao[this.nivelPermissao])
     }
 
     public static carregar(): Array<Funcionario>{
         const dados: Array<object> = FileManagement.readFile("funcionario.txt")   
+        
+        if(dados.length === 0){
+            console.log("Nenhum funcionario carregado!")
+            return []
+        }
 
         const funcionarios: Array<Funcionario> = [] 
         dados.forEach((obj) => {
@@ -43,7 +51,8 @@ export default class Funcionario{
                     obj["endereco"],
                     obj["usuario"],
                     obj["senha"],
-                    NivelPermissao[obj["nivelPermissao"] as keyof typeof NivelPermissao]
+                    NivelPermissao[obj["nivelPermissao"] as keyof typeof NivelPermissao],
+                    obj["etapasAssociadas"],
                 )
             )
         })
@@ -52,7 +61,7 @@ export default class Funcionario{
         return funcionarios
     }
 
-    public salvar(){
+    public salvar():void{
         const objectFuncionario = {
             id : this.id,
             nome : this.nome,
@@ -64,10 +73,9 @@ export default class Funcionario{
         }
 
         FileManagement.saveFile(objectFuncionario, "funcionario.txt")
-
     }
 
-    public autenticar(usuario: string, senha: string){
+    public autenticar(usuario: string, senha: string):boolean{
         if(usuario === this.usuario && senha === this.senha) return true;
         return false
     }

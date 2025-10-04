@@ -1,0 +1,7 @@
+tipo : ELETRICO
+resultado : APROVADO
+aeronaveAssociada : 1
+---
+tipo : AERODINAMICO
+resultado : REPROVADO
+aeronaveAssociada : 1
