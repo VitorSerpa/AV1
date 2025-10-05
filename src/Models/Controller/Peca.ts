@@ -4,13 +4,22 @@ import { stringify } from "querystring";
 import FileManagement from "./FileManagement";
 
 export default class Peca {
+    public id: string;
     public nome: string;
     public tipo: TipoPeca;
     public fornecedor: string;
     public status: StatusPeca;
     public aeronaveAssociada: string;
 
-    constructor(nome: string, tipo: TipoPeca, fornecedor: string, status: StatusPeca, aeronaveAssociada: string) {
+    constructor(
+        id: string,
+        nome: string,
+        tipo: TipoPeca,
+        fornecedor: string,
+        status: StatusPeca,
+        aeronaveAssociada: string
+    ) {
+        this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.fornecedor = fornecedor;
@@ -24,6 +33,7 @@ export default class Peca {
 
     public salvar(): void {
         const objectAeronave = {
+            id: this.id,
             nome: this.nome,
             tipo: TipoPeca[this.tipo],
             fornecedor: this.fornecedor,
@@ -31,6 +41,16 @@ export default class Peca {
             aeronaveAssociada: this.aeronaveAssociada,
         };
         FileManagement.saveFile(objectAeronave, "peca.txt");
+    }
+
+    public printPeca() {
+        console.log("===================");
+        console.log("ID: " + this.id);
+        console.log("Nome: " + this.nome);
+        console.log("Tipo da Peça: " + TipoPeca[this.tipo]);
+        console.log("Fornecedor: " + this.fornecedor);
+        console.log("Status: " + StatusPeca[this.status]);
+        console.log("Aeronave Associada: " +  this.aeronaveAssociada);
     }
 
     public static carregar(): Array<Peca> {
@@ -45,6 +65,7 @@ export default class Peca {
         dados.forEach((obj) => {
             pecas.push(
                 new Peca(
+                    obj["id"],
                     obj["nome"],
                     TipoPeca[obj["tipo"] as keyof typeof TipoPeca],
                     obj["fornecedor"],

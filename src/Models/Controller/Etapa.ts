@@ -21,6 +21,12 @@ export default class Etapa {
     }
 
     public associarFuncionario(func: Funcionario) {
+        const etapaId = parseInt(this.id);
+
+        if (!func.arrayEtapasAssociadas.includes(etapaId)) {
+            func.arrayEtapasAssociadas.push(etapaId);
+        }
+
         this.arrayFuncionarios.push(func);
     }
 
@@ -47,7 +53,7 @@ export default class Etapa {
             status: StatusEtapa[this.status],
             aeronaveAssociada: this.aeronaveAssociada,
         };
-        
+
         FileManagement.saveFile(objectAeronave, "etapa.txt");
     }
 
@@ -61,21 +67,12 @@ export default class Etapa {
 
         const etapas: Array<Etapa> = [];
         dados.forEach((obj) => {
-            etapas.push(
-                new Etapa(
-                    obj["id"],
-                    obj["nome"],
-                    obj["prazo"],
-                    [],
-                    obj["aeronaveAssociada"]
-                )
-            );
+            etapas.push(new Etapa(obj["id"], obj["nome"], obj["prazo"], [], obj["aeronaveAssociada"]));
         });
         console.log("===================");
         console.log(dados.length + " Etapas carregadas com sucesso!");
         return etapas;
     }
-
 
     public printEtapa(): void {
         console.log("===================");

@@ -5,6 +5,7 @@ import Peca from "./Peca";
 import Teste from "./Teste";
 import { TipoTeste } from "../Entities/TipoTeste";
 import { ResultadoTeste } from "../Entities/ResultadoTeste";
+import Relatorio from "./Relatorio";
 
 export default class Aeronave {
     public codigo: string;
@@ -15,6 +16,7 @@ export default class Aeronave {
     public arrayPecas: Array<Peca> = [];
     public arrayEtapas: Array<Etapa> = [];
     public arrayTestes: Array<Teste> = [];
+    public relatorio: Relatorio | undefined
 
     constructor(
         codigo: string,
@@ -36,6 +38,10 @@ export default class Aeronave {
 
     public associarEtapa(etapa: Etapa) {
         this.arrayEtapas.push(etapa);
+    }
+
+    public associarPeca(peca: Peca) {
+        this.arrayPecas.push(peca);
     }
 
     public static carregar(): Array<Aeronave> {

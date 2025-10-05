@@ -1,0 +1,16 @@
+========= RELATÓRIO DA AERONAVE =========
+Código: 2
+Modelo: Caça de Combate
+Tipo: MILITAR
+Capacidade: 2
+Alcance: 1200 km
+
+--- Peças Associadas ---
+1. Trem de pouso
+
+--- Etapas Associadas ---
+1. Configuração dos controles de Bordo
+
+--- Testes Associados ---
+1. Tipo: HIDRAULICO | Resultado: APROVADO
+==========================================

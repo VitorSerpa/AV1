@@ -5,13 +5,21 @@ endereco : Rua Eugenio de Melo
 usuario : VitorSerpa
 senha : 1234
 nivelPermissao : ADMINISTRADOR
-etapasAssociadas : [1, 2]
+etapasAssociadas   : [1, 2]
 ---
 id : 2
+nome : Miguel Tomio
+telefone : 12981312111
+endereco : Praça do Sol
+usuario : Mig
+senha : 1234
+nivelPermissao : ENGENHEIRO
+etapasAssociadas  : [2]---
+id : 3
 nome : Henry
 telefone : 12981312111
-endereco : Rua Eugenio de Melo
-usuario : Henry
-senha : 123
+endereco : Praça do Sapo
+usuario : henry
+senha : 1234
 nivelPermissao : OPERADOR
-etapasAssociadas : [1, 2]
+etapasAssociadas : []

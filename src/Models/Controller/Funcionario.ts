@@ -56,7 +56,7 @@ export default class Funcionario{
                 )
             )
         })
-        console.log("===================")
+        console.log("===================");
         console.log(dados.length + " Funcionarios carregados com sucesso!")
         return funcionarios
     }
@@ -69,7 +69,8 @@ export default class Funcionario{
             endereco : this.endereco,
             usuario : this.usuario,
             senha : this.senha,
-            nivelPermissao : NivelPermissao[this.nivelPermissao]
+            nivelPermissao : NivelPermissao[this.nivelPermissao],
+            etapasAssociadas: "[]"
         }
 
         FileManagement.saveFile(objectFuncionario, "funcionario.txt")

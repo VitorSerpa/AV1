@@ -1,7 +1,11 @@
-tipo : ELETRICO
+tipo : HIDRAULICO
 resultado : APROVADO
 aeronaveAssociada : 1
 ---
+tipo : HIDRAULICO
+resultado : APROVADO
+aeronaveAssociada : 2
+---
 tipo : AERODINAMICO
-resultado : REPROVADO
+resultado : APROVADO
 aeronaveAssociada : 1

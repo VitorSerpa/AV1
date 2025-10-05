@@ -1,11 +1,11 @@
 id : 1
-nome : Criação do BIco
+nome : Etapa 1
 prazo : 2 Semanas
-status : PENDENTE
+status : ANDAMENTO
 aeronaveAssociada : 1
 ---
 id : 2
-nome : Criação do Trem de Pouso
+nome : Configuração dos controles de Bordo
 prazo : 2 Semanas
-status : PENDENTE
+status : ANDAMENTO
 aeronaveAssociada : 2

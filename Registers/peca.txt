@@ -1,0 +1,6 @@
+id : 1
+nome : Trem de Pouso
+tipo : IMPORTADA
+fornecedor : Boeing
+status : EM_TRANSPORTE
+aeronaveAssociada : 1
