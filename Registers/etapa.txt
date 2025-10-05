@@ -1,11 +1,6 @@
+
 id : 1
-nome : Etapa 1
-prazo : 2 Semanas
-status : ANDAMENTO
-aeronaveAssociada : 1
----
-id : 2
 nome : Configuração dos controles de Bordo
 prazo : 2 Semanas
-status : ANDAMENTO
+status : PENDENTE
 aeronaveAssociada : 2

@@ -1,25 +1,9 @@
 id : 1
-nome : Serpe
+nome : admin
 telefone : 12981312111
-endereco : Rua Eugenio de Melo
-usuario : VitorSerpa
+endereco : Rua 1
+usuario : admin
 senha : 1234
 nivelPermissao : ADMINISTRADOR
-etapasAssociadas   : [1, 2]
----
-id : 2
-nome : Miguel Tomio
-telefone : 12981312111
-endereco : Praça do Sol
-usuario : Mig
-senha : 1234
-nivelPermissao : ENGENHEIRO
-etapasAssociadas  : [2]---
-id : 3
-nome : Henry
-telefone : 12981312111
-endereco : Praça do Sapo
-usuario : henry
-senha : 1234
-nivelPermissao : OPERADOR
 etapasAssociadas : []
+
